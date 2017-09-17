@@ -1,21 +1,55 @@
 
-/*let loadHTML = function() {
-	setTimeout(function(){
-        $('#coverPage').addClass("invisible");
-        //$('#coverPage').attr('hidden');
-        $('#content').removeAttr('hidden');
-
-    },1200);
-}*/
-
-const app = {
-    item : {
+const character = [
+    {
+        name: 'history',
+        url: 'assets/img/history.png',
         question: undefined,
         answer: undefined,
     },
+    {
+        name: 'science',
+        url: 'assets/img/science.png',
+        question: undefined,
+        answer: undefined,
+    },
+    {
+        name: 'geography',
+        url: 'assets/img/geography.png',
+        question: 'Holaaa',
+        answer: undefined,
+    },
+    {
+        name: 'king',
+        url: 'assets/img/geography.png',
+        question: 'Holaaa',
+        answer: undefined,
+    },
+    {
+        name: 'enterteiment',
+        url: 'assets/img/enterteiment.png',
+        question: undefined,
+        answer: undefined,
+    },
+    {
+        name: 'art',
+        url: 'assets/img/art.png',
+        question: undefined,
+        answer: undefined,
+    },
+    {
+        name: 'sports',
+        url: 'assets/img/sports.png',
+        question: undefined,
+        answer: undefined,
+    }       
+    
+];
+
+const app = {
+    
     init: function() {
         app.changeCoverPage();
-        //app.setup();
+        app.setup();
     },
 
     setup: function () {
@@ -36,29 +70,19 @@ const app = {
     },
     
     clickHandler: function() {
-        var $r = $('.roulette').fortune(6);
         $('.spinner').off('click');
         $('.spinner span').hide();
-        $r.spin().done(function(price) {
-          $('.spinner').on('click', app.clickHandler);
-          $('.spinner span').show();
+        $r.spin().done(function(character) {
+            $('#content').text('You choose: ' + character.name);
+            console.log(character.name);
+            $('.spinner').on('click', app.clickHandler);
+            $('.spinner span').show();
         });
     }
 }
 $(document).ready(app.init);
- 
-var $r = $('.roulette').fortune(6);
+let $r = $('.roulette').fortune(character);
 
-var clickHandler = function() {
-  $('.spinner').off('click');
-  $('.spinner span').hide();
-  $r.spin().done(function(price) {
-    $('.spinner').on('click', clickHandler);
-    $('.spinner span').show();
-  });
-};
-
-$('.spinner').on('click', clickHandler);
 
 /*const app  = {
     item :  {
