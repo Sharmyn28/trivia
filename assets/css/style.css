@@ -1,12 +1,8 @@
 
-/*.justify-content-center {
-    -ms-flex-pack: center!important;
-    justify-content: center!important;
-}*/
-
 .container_roulette {
     position: absolute;
-    left: 20%;
+    left: 14%;
+    transform: scale(0.7);
   }
   .roulette {
     position: absolute;
@@ -45,3 +41,15 @@
       border-right: 10px solid transparent;
       border-bottom: 10px solid gray;
   }
+
+/*--------STYLE------*/
+
+body{
+    background-color: rgba(128, 128, 128, 0.77)
+}
+
+.justify{
+    position: absolute;
+    top: 18%;
+    left: 10%;
+}
