@@ -3,7 +3,7 @@
 const character = [
     {
         name: 'history',
-        url: 'assets/img/history.png',
+        url: 'assets/img/history1.png',
         question: 'What was the name of the diplomatic war between USA and USSR?',
         answer1: 'Cold War',
         answer2: 'World War',
@@ -11,7 +11,7 @@ const character = [
     },
     {
         name: 'science',
-        url: 'assets/img/science.png',
+        url: 'assets/img/science1.png',
         question: 'Which of these is NOT a subatomic particle?',
         answer1: 'Leuctron',
         answer2: 'Electron',
@@ -19,7 +19,7 @@ const character = [
     },
     {
         name: 'geography',
-        url: 'assets/img/geography.png',
+        url: 'assets/img/geography1.png',
         question: 'Nova Scotia is part of which country?',
         answer1: 'Canada',
         answer2: 'United Kingdom',
@@ -43,7 +43,7 @@ const character = [
     },
     {
         name: 'art',
-        url: 'assets/img/art.png',
+        url: 'assets/img/art1.png',
         question: 'Where is the painting the "Mona Lisa" displayed?',
         answer1: 'Louvre Museum',
         answer2: 'The Museum Of Modern Art',
@@ -51,7 +51,7 @@ const character = [
     },
     {
         name: 'sports',
-        url: 'assets/img/sports.png',
+        url: 'assets/img/sport1.png',
         question: 'Who won Best Player at the 2014 FIFA World Cup held in Brazil?',
         answer1: 'Lionel Messi',
         answer2: 'Cristiano Ronaldo',
@@ -65,29 +65,31 @@ const app = {
     init: function() {
         app.changeCoverPage();
         app.setup();
+        app.saveUserAnswer();
     },
 
     setup: function () {
         $('.spinner').on('click', app.clickHandler);
-        $('.btn').on('clack', app.saveUserAnswer);
+        //$('.btn').on('click', app.saveUserAnswer());
     },
 
     changeCoverPage : function() {
         setTimeout(function(){
             //$('#coverPage').addClass("invisible");
             //$('#coverPage').attr('hidden');
-            //$('#content').removeAttr('hidden');
             $('#roulette').removeAttr('hidden');
         },2500);
     },
 
     showQuestion: function(character) {
-        $('#question_div').empty();
+        $('#content').empty();
         let question = `<h5 id="question" class="text-center">${character.question}</h5>`
-        let answer = `<div class="d-flex row align-items-center col-4"><button id='${character.answer1}' class ='btn'>${character.answer1}</button> \
-                        <button id='${character.answer2}' class ='btn'>${character.answer2}</button> \
-                        <button id='${character.answer3}' class ='btn'>${character.answer3}</button> </div>`
-        $('#question_div').append(question, answer); 
+        let img = `<img src='${character.url}' class='d-flex row align-items-center col-3 img_character'>`
+        let answer = `<div class="d-flex row align-items-center col-9"><button id='${character.answer1}' class ='btn' onclick='app.saveUserAnswer()'>${character.answer1}</button> \
+                        <button id='${character.answer2}' class ='btn' onclick='app.saveUserAnswer()'>${character.answer2}</button> \
+                        <button id='${character.answer3}' class ='btn' onclick='app.saveUserAnswer()'>${character.answer3}</button> </div>`
+        $('#content').append(question, img, answer);
+        //app.saveUserAnswer(); 
     },
     
     clickHandler: function() {
@@ -106,13 +108,13 @@ const app = {
     saveUserAnswer : function () {
         app.answers.push({
             question: character.question,
-            answer: $('button').click((e)=>{
+            answer: $('.btn').click((e)=>{
                 return e.target.id
             })
         });
         //localStorage.clear();
         localStorage.setItem(character.question, character.answer1);
-        $('#question_div').empty();
+        $('#content').empty();
         console.log(localStorage);
         console.log(app.answers);
     }
