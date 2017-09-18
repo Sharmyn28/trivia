@@ -61,6 +61,7 @@ const character = [
 
 const app = {
     
+    answers: [],
     init: function() {
         app.changeCoverPage();
         app.setup();
@@ -68,7 +69,7 @@ const app = {
 
     setup: function () {
         $('.spinner').on('click', app.clickHandler);
-
+        $('.btn').on('clack', app.saveUserAnswer);
     },
 
     changeCoverPage : function() {
@@ -81,11 +82,12 @@ const app = {
     },
 
     showQuestion: function(character) {
-        let question = `<h5 id="question">'${character.question}'</h5>`
-        let answer1 = `<button id='${character.answer1}'>${character.answer1}</button>`
-        let answer2 = `<button id='${character.answer2}'>${character.answer2}</button>`
-        let answer3 = `<button id='${character.answer3}'>${character.answer3}</button>`
-        $('#question_div').append(question, answer1, answer2, answer3); 
+        $('#question_div').empty();
+        let question = `<h5 id="question" class="text-center">${character.question}</h5>`
+        let answer = `<div class="d-flex row align-items-center col-4"><button id='${character.answer1}' class ='btn'>${character.answer1}</button> \
+                        <button id='${character.answer2}' class ='btn'>${character.answer2}</button> \
+                        <button id='${character.answer3}' class ='btn'>${character.answer3}</button> </div>`
+        $('#question_div').append(question, answer); 
     },
     
     clickHandler: function() {
@@ -96,63 +98,25 @@ const app = {
             $('.spinner').on('click', app.clickHandler);
             $('.spinner span').show();
             app.showQuestion(character);
-            /*let question = `<h5 id="question">'${character.question}'</h5>`
-            let answer1 = `<button id='${character.answer1}'>${character.answer1}</button>`
-            let answer2 = `<button id='${character.answer2}'>${character.answer2}</button>`
-            let answer3 = `<button id='${character.answer3}'>${character.answer3}</button>`
-            $('#question_div').append(question, answer1, answer2, answer3);*/
             console.log(character.question + ' : '+ character.answer1);
             $('#content').removeAttr('hidden');
         });
+    },
+
+    saveUserAnswer : function () {
+        app.answers.push({
+            question: character.question,
+            answer: $('button').click((e)=>{
+                return e.target.id
+            })
+        });
+        //localStorage.clear();
+        localStorage.setItem(character.question, character.answer1);
+        $('#question_div').empty();
+        console.log(localStorage);
+        console.log(app.answers);
     }
+
 }
 $(document).ready(app.init);
 let $r = $('.roulette').fortune(character);
-
-
-/*const app  = {
-    item :  {
-        name: undefined,
-        comment: undefined
-    },
-    init : function () {
-        app.item.name = $('#name');
-        app.item.comment = $('#comment');
-
-        app.setup ();
-        app.showPrevComments ();
-    },
-
-    setup: function () {
-        $('#btn_add').click (app.addComment) ;
-        $('#btn_clear').click (app.clearComments) ;
-    },
-
-    saveData: function(){
-        localStorage.setItem(app.item.name.val(), app.item.comment.val());
-        console.log(localStorage);
-    },
-
-    addComment: function (event) {
-        $('#ale').append ( `<div class='coment'><p class= 'name'><strong> ${app.item.name.val()}</strong> \
-                            <br> ${app.item.comment.val()} </p></div>`);
-        app.saveData();
-        app.item.name.val('');
-        app.item.comment.val('');
-    },
-
-    clearComments: function (event) {
-        $('#ale').empty();
-        localStorage.clear();
-        console.log(localStorage);
-    },
-
-    showPrevComments: function(){
-        $.each(localStorage, function (index, value) {
-            $('#ale').append( `<div class='coment'><p class= 'name'><strong> ${index}</strong> \
-                                <br> ${value} </p></div>`);
-        });
-    }
-};
-
-$(document).ready (app.init);*/
