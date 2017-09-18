@@ -65,7 +65,6 @@ const app = {
     init: function() {
         app.changeCoverPage();
         app.setup();
-        app.saveUserAnswer();
     },
 
     setup: function () {
@@ -85,11 +84,10 @@ const app = {
         $('#content').empty();
         let question = `<h5 id="question" class="text-center">${character.question}</h5>`
         let img = `<img src='${character.url}' class='d-flex row align-items-center col-3 img_character'>`
-        let answer = `<div class="d-flex row align-items-center col-9"><button id='${character.answer1}' class ='btn' onclick='app.saveUserAnswer()'>${character.answer1}</button> \
-                        <button id='${character.answer2}' class ='btn' onclick='app.saveUserAnswer()'>${character.answer2}</button> \
-                        <button id='${character.answer3}' class ='btn' onclick='app.saveUserAnswer()'>${character.answer3}</button> </div>`
+        let answer = `<button id='${character.answer1}' class ='btn' onclick='app.saveUserAnswer(this)'>${character.answer1}</button> \
+                        <button id='${character.answer2}' class ='btn' onclick='app.saveUserAnswer(this)'>${character.answer2}</button> \
+                        <button id='${character.answer3}' class ='btn' onclick='app.saveUserAnswer(this)'>${character.answer3}</button>`
         $('#content').append(question, img, answer);
-        //app.saveUserAnswer(); 
     },
     
     clickHandler: function() {
@@ -105,18 +103,19 @@ const app = {
         });
     },
 
-    saveUserAnswer : function () {
+    saveUserAnswer : function (event) {
+        console.log(event);
         app.answers.push({
-            question: character.question,
-            answer: $('.btn').click((e)=>{
-                return e.target.id
-            })
+            question: event.parentNode.firstChild.textContent,
+            answer: event.textContent            
         });
-        //localStorage.clear();
-        localStorage.setItem(character.question, character.answer1);
+        
         $('#content').empty();
-        console.log(localStorage);
         console.log(app.answers);
+    },
+
+    correctAnswer : function(){
+        
     }
 
 }
