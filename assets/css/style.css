@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Righteous');
 
 .container_roulette {
-    transform: scale(0.8);
+    transform: scale(0.85);
   }
   .roulette {
     margin: 0 auto;
@@ -41,7 +42,15 @@
 /*--------STYLE------*/
 
 body{
-    background-color: rgba(128, 128, 128, 0.77)
+    background-color: rgba(128, 128, 128, 0.77);
+}
+
+.upperCase{
+  text-transform: uppercase;
+}
+
+.archivo{
+  font-family: 'Righteous';
 }
 
 .justify{
@@ -51,6 +60,52 @@ body{
     justify-content: center;
 }
 
+#title{
+  color: #fff;
+  font-size: 3em;
+}
+
 .img_character{
-  transform: scale(1.2);
+  transform: scale(1.1);
+}
+
+#content{
+  background-color: #EBDEDE;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.outside{
+  flex-wrap: wrap;
+}
+.answer{
+  margin: 10px;
+}
+
+@media(max-width: 768px){
+	#title{
+		font-size: 1.5em;
+  }
+  
+  .container_roulette {
+    transform: scale(0.7);
+  }
+
+  .img_character{
+    transform: scale(0.5);
+  }
+
+  #question{
+    font-size: 1.2em;
+  }
+  .outside{
+    margin: 0;
+    padding: 0;
+  }
+  .column{
+    display: flex;
+    flex-direction: column;
+  }
 }

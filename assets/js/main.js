@@ -76,25 +76,27 @@ const app = {
 
     setup: function () {
         $('.spinner').on('click', app.clickHandler);
-        //$('.btn').on('click', app.saveUserAnswer());
+        //$('.btn').on('click', app.saveUserAnswer(this));
     },
 
     changeCoverPage : function() {
         setTimeout(function(){
             //$('#coverPage').addClass("invisible");
             //$('#coverPage').attr('hidden');
+            $('#title').removeAttr('hidden');
             $('#roulette').removeAttr('hidden');
         },2500);
     },
 
     showQuestion: function(character) {
         $('#content').empty();
-        let question = `<h5 id="question" class="text-center">${character.question}</h5>`
-        let img = `<img src='${character.url}' class='d-flex row align-items-center col-3 img_character'>`
-        let answer = `<button id='${character.answer1}' class ='btn' onclick='app.saveUserAnswer(this)'>${character.answer1}</button> \
-                        <button id='${character.answer2}' class ='btn' onclick='app.saveUserAnswer(this)'>${character.answer2}</button> \
-                        <button id='${character.answer3}' class ='btn' onclick='app.saveUserAnswer(this)'>${character.answer3}</button>`
-        $('#content').append(question, img, answer);
+        let question = `<h3 id="question" class="text-center">${character.question}</h3><br>`
+        //let img = `<img src='${character.url}' class='col-sm-5 col-md-3 col-lg-3 img_character'>`
+        let answer = `<div class='row justify outside'><img src='${character.url}' class='col-sm-3 col-md-3 col-lg-3 img_character'> \
+                        <div class='col-sm-4 col-md-9 col-lg-9 column'><button id='${character.answer1}' class ='btn answer' onclick='app.saveUserAnswer(this)'>${character.answer1}</button> \
+                        <button id='${character.answer2}' class ='btn answer' onclick='app.saveUserAnswer(this)'>${character.answer2}</button> \
+                        <button id='${character.answer3}' class ='btn answer' onclick='app.saveUserAnswer(this)'>${character.answer3}</button></div></div>`
+        $('#content').append(question, answer);
     },
     
     clickHandler: function() {
@@ -112,7 +114,7 @@ const app = {
 
     saveUserAnswer : function (event) {
         app.answers.push({
-            question: event.parentNode.firstChild.textContent,
+            question: event.parentNode.parentNode.parentNode.firstChild.textContent,
             answer: event.textContent            
         });
 
@@ -130,7 +132,7 @@ const app = {
                         swal('Congrats!','Correct Answer','success');
                         return true;
                     }else{
-                        swal('Ooops! Incorrect Answer','Keep trying','error');
+                        swal('Ooops! Wrong Answer','Keep trying','error');
                         return false;
                     }
                 }
