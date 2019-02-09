@@ -12,7 +12,7 @@
     background-image: url('http://triviacrackanswers.org/wp-content/uploads/2014/12/rrota.png');
     border-radius: 300px;
   }
-  
+
   .spinner {
     cursor: pointer;
     color: white;
@@ -27,11 +27,11 @@
     z-index: 1000;
     background-color: gray;
   }
-  
+
   .spinner .pointer {
     position: absolute;
-    width: 0; 
-      height: 0; 
+    width: 0;
+      height: 0;
     top: -8px;
     left: 40px;
       border-left: 10px solid transparent;
@@ -65,9 +65,9 @@ body{
   font-size: 3em;
 }
 
-.img_character{
+/* .img_character{
   transform: scale(1.1);
-}
+} */
 
 #content{
   background-color: #EBDEDE;
@@ -88,14 +88,14 @@ body{
 	#title{
 		font-size: 1.5em;
   }
-  
+
   .container_roulette {
     transform: scale(0.7);
   }
 
-  .img_character{
+  /* .img_character{
     transform: scale(0.5);
-  }
+  } */
 
   #question{
     font-size: 1.2em;
